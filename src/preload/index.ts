@@ -36,6 +36,10 @@ const api: ElectronAPI = {
   },
   file: {
     copy: (src, dest) => ipcRenderer.invoke(IPC.FILE_COPY, src, dest)
+  },
+  openai: {
+    validateKey: (apiKey) => ipcRenderer.invoke(IPC.OPENAI_VALIDATE_KEY, apiKey),
+    listModels: () => ipcRenderer.invoke(IPC.OPENAI_LIST_MODELS)
   }
 }
 

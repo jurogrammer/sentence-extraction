@@ -9,7 +9,9 @@ export const IPC = {
   PIPELINE_ERROR: 'pipeline:error',
   DIALOG_OPEN_FILE: 'dialog:open-file',
   DIALOG_SAVE_FILE: 'dialog:save-file',
-  FILE_COPY: 'file:copy'
+  FILE_COPY: 'file:copy',
+  OPENAI_VALIDATE_KEY: 'openai:validate-key',
+  OPENAI_LIST_MODELS: 'openai:list-models'
 } as const
 
 export const DEFAULT_SETTINGS = {

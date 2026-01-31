@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs'
 import { parse as parseSrt } from 'subtitle'
+import { parse as parseAssFile } from 'ass-compiler'
 import type { TimedSentence } from '../../shared/types'
 
 export function parseSubtitleFile(filePath: string): TimedSentence[] {
@@ -7,6 +8,9 @@ export function parseSubtitleFile(filePath: string): TimedSentence[] {
 
   if (filePath.endsWith('.vtt')) {
     return parseVtt(content)
+  }
+  if (filePath.endsWith('.ass') || filePath.endsWith('.ssa')) {
+    return parseAss(content)
   }
   return parseSrtContent(content)
 }
@@ -38,10 +42,28 @@ function parseVtt(content: string): TimedSentence[] {
   return parseSrtContent(cleaned)
 }
 
+function parseAss(content: string): TimedSentence[] {
+  const parsed = parseAssFile(content)
+  const sentences: TimedSentence[] = []
+
+  for (const dialogue of parsed.events.dialogue) {
+    const text = stripTags(dialogue.Text.combined).trim()
+    if (!text) continue
+    sentences.push({
+      index: sentences.length,
+      startTime: dialogue.Start / 1000,
+      endTime: dialogue.End / 1000,
+      text
+    })
+  }
+
+  return mergeDuplicates(sentences)
+}
+
 function stripTags(text: string): string {
   return text
-    .replace(/<[^>]+>/g, '')
-    .replace(/\{[^}]+\}/g, '')
+    .replace(/<[^>]+>/g, '') // HTML tags
+    .replace(/\{[^}]+\}/g, '') // ASS/SSA style tags: {\tag}, {\\tag}
     .replace(/\n/g, ' ')
     .trim()
 }

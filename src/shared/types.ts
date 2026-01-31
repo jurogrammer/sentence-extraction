@@ -65,6 +65,10 @@ export interface ElectronAPI {
   file: {
     copy: (src: string, dest: string) => Promise<void>
   }
+  openai: {
+    validateKey: (apiKey: string) => Promise<boolean>
+    listModels: () => Promise<string[]>
+  }
 }
 
 declare global {

@@ -1,7 +1,9 @@
 import { ipcMain, dialog, BrowserWindow } from 'electron'
+import OpenAI from 'openai'
 import { IPC } from '../shared/constants'
 import { getSettingsRepo } from './db/settings-repo'
-import type { PipelineOptions, SettingKey } from '../shared/types'
+import { logger } from './utils/logger'
+import type { PipelineOptions, SettingKey, Settings } from '../shared/types'
 
 export function registerIpcHandlers(): void {
   const settings = getSettingsRepo()
@@ -15,7 +17,7 @@ export function registerIpcHandlers(): void {
   })
 
   ipcMain.handle(IPC.SETTINGS_SET, (_event, key: SettingKey, value: unknown) => {
-    settings.set(key, value)
+    settings.set(key, value as Settings[SettingKey])
   })
 
   ipcMain.handle(IPC.DIALOG_OPEN_FILE, async (_event, filters?: Electron.FileFilter[]) => {
@@ -59,5 +61,36 @@ export function registerIpcHandlers(): void {
   ipcMain.handle(IPC.PIPELINE_CANCEL, async () => {
     const { cancelPipeline } = await import('./services/pipeline')
     cancelPipeline()
+  })
+
+  ipcMain.handle(IPC.OPENAI_VALIDATE_KEY, async (_event, apiKey: string) => {
+    try {
+      const client = new OpenAI({ apiKey })
+      await client.models.list()
+      return true
+    } catch (err) {
+      logger.error('OpenAI key validation failed', err)
+      return false
+    }
+  })
+
+  ipcMain.handle(IPC.OPENAI_LIST_MODELS, async () => {
+    try {
+      const apiKey = settings.get('openaiApiKey')
+      if (!apiKey) throw new Error('OpenAI API key not configured')
+
+      const client = new OpenAI({ apiKey })
+      const models = await client.models.list()
+      
+      // Filter for GPT models only
+      const gptModels = models.data
+        .filter((model) => model.id.includes('gpt'))
+        .map((model) => model.id)
+      
+      return gptModels
+    } catch (err) {
+      logger.error('Failed to list OpenAI models', err)
+      throw err instanceof Error ? err : new Error(String(err))
+    }
   })
 }
