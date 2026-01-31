@@ -54,18 +54,24 @@ export async function runPipeline(
 
     if (signal.aborted) throw new Error('Cancelled')
 
-    // Phase 2: Get sentences
-    onProgress({ phase: 'subtitles', message: 'Extracting sentences...', percent: 30 })
-    let sentences: TimedSentence[]
+     // Phase 2: Get sentences
+     onProgress({ phase: 'subtitles', message: 'Extracting sentences...', percent: 30 })
+     let sentences: TimedSentence[]
 
-    if (subtitlePath) {
-      logger.info('Parsing subtitle file...')
-      sentences = parseSubtitleFile(subtitlePath)
-    } else {
-      logger.info('No subtitles found, using Whisper transcription...')
-      onProgress({ phase: 'whisper', message: 'Transcribing audio...', percent: 35 })
-      sentences = await transcribe(videoPath, tempDir, signal)
-    }
+     // Subtitle priority: user-provided > yt-dlp embedded > Whisper transcription
+     if (options.subtitlePath) {
+       logger.info('Using user-provided subtitle file...')
+       const userSubtitlePath = join(tempDir, `user-subtitle.${options.subtitlePath.split('.').pop()}`)
+       copyFileSync(options.subtitlePath, userSubtitlePath)
+       sentences = parseSubtitleFile(userSubtitlePath)
+     } else if (subtitlePath) {
+       logger.info('Parsing subtitle file from video...')
+       sentences = parseSubtitleFile(subtitlePath)
+     } else {
+       logger.info('No subtitles found, using Whisper transcription...')
+       onProgress({ phase: 'whisper', message: 'Transcribing audio...', percent: 35 })
+       sentences = await transcribe(videoPath, tempDir, signal)
+     }
 
     if (sentences.length === 0) throw new Error('No sentences found in video')
     logger.info(`Found ${sentences.length} sentences`)
