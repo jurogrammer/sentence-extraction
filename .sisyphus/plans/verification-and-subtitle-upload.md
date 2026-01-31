@@ -504,7 +504,7 @@ New Path: Task 7 → Task 8 → Task 6
 
 ---
 
-- [ ] 8. OpenAI API 검증 UI 구현 (n8n 스타일)
+- [x] 8. OpenAI API 검증 UI 구현 (n8n 스타일)
 
   **What to do**:
   - 새 컴포넌트 `ApiKeyInput.tsx`: 패스워드 입력 + 검증 상태 표시

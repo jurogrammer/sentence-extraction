@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { useSettings } from '../hooks/useSettings'
 import ProviderSelector from '../components/ProviderSelector'
 import LanguageSwitch from '../components/LanguageSwitch'
+import ApiKeyInput from '../components/ApiKeyInput'
+import ModelSelect from '../components/ModelSelect'
 
 export default function SettingsPage() {
   const { t } = useTranslation()
@@ -33,16 +35,16 @@ export default function SettingsPage() {
       {/* OpenAI settings */}
       {settings.aiProvider === 'openai' && (
         <div className="space-y-4 pl-4 border-l-2 border-blue-200">
-          <Field
+          <ApiKeyInput
             label={t('settings.openaiApiKey')}
-            type="password"
             value={settings.openaiApiKey}
             onChange={(v) => update('openaiApiKey', v)}
           />
-          <Field
+          <ModelSelect
             label={t('settings.openaiModel')}
             value={settings.openaiModel}
             onChange={(v) => update('openaiModel', v)}
+            apiKey={settings.openaiApiKey}
           />
         </div>
       )}

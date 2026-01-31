@@ -26,3 +26,8 @@
 - Playwright version: 1.58.1 ✓
 - TypeScript compilation: No errors ✓
 - Directory structure: Created successfully ✓
+
+## UI Implementation (OpenAI Settings)
+- **UI Components**: Implemented `ApiKeyInput` and `ModelSelect` using raw SVG icons instead of `lucide-react` to avoid adding dependencies.
+- **State Management**: Used local state in components for validation/fetching status, while keeping the source of truth in `SettingsPage` (via `useSettings`).
+- **Debouncing**: Implemented debouncing in both validation (500ms) and model fetching (1000ms) to prevent API rate limiting and UI flickering.
