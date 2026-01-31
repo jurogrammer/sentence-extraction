@@ -13,12 +13,7 @@ export async function launchElectronApp(): Promise<ElectronAppContext> {
   })
 
   const context = await electronApp.context()
-  let window: Page | null = null
-
-  const pages = electronApp.windows()
-  if (pages.length > 0) {
-    window = pages[0]
-  }
+  const window = await waitForWindow(electronApp)
 
   return { electronApp, window, context }
 }

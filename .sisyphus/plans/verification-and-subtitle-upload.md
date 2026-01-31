@@ -572,7 +572,7 @@ New Path: Task 7 → Task 8 → Task 6
 
 ---
 
-- [ ] 6. E2E 테스트 작성 및 실행
+- [ ] 6. E2E 테스트 작성 및 실행 (사용자 수동 진행)
 
   **What to do**:
   - OpenAI 연동 테스트: API 키 설정 → 짧은 비디오로 파이프라인 실행 → cardCount > 0 확인
