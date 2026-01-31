@@ -30,6 +30,16 @@ export function registerIpcHandlers(): void {
     return result.canceled ? null : result.filePaths[0]
   })
 
+  ipcMain.handle(IPC.DIALOG_OPEN_SUBTITLE, async () => {
+    const result = await dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters: [
+        { name: 'Subtitle Files', extensions: ['srt', 'vtt', 'ass', 'ssa'] }
+      ]
+    })
+    return result.canceled ? null : result.filePaths[0]
+  })
+
   ipcMain.handle(IPC.DIALOG_SAVE_FILE, async (_event, defaultName: string) => {
     const result = await dialog.showSaveDialog({
       defaultPath: defaultName,

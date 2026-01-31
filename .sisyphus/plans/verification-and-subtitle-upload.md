@@ -217,7 +217,7 @@ New Path: Task 7 → Task 8 → Task 6
 
 ---
 
-- [ ] 2. 타입 & IPC 확장 (subtitlePath 추가)
+- [x] 2. 타입 & IPC 확장 (subtitlePath 추가)
 
   **What to do**:
   - `PipelineOptions` 인터페이스에 `subtitlePath?: string` 필드 추가

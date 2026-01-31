@@ -32,6 +32,7 @@ const api: ElectronAPI = {
   },
   dialog: {
     openFile: (filters) => ipcRenderer.invoke(IPC.DIALOG_OPEN_FILE, filters),
+    openSubtitleFile: () => ipcRenderer.invoke(IPC.DIALOG_OPEN_SUBTITLE),
     saveFile: (defaultName) => ipcRenderer.invoke(IPC.DIALOG_SAVE_FILE, defaultName)
   },
   file: {

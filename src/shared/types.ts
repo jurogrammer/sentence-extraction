@@ -13,6 +13,7 @@ export interface SelectedSentence extends TimedSentence {
 export interface PipelineOptions {
   inputType: 'url' | 'file'
   input: string // URL or file path
+  subtitlePath?: string
   signal?: AbortSignal
 }
 
@@ -60,6 +61,7 @@ export interface ElectronAPI {
   }
   dialog: {
     openFile: (filters?: Electron.FileFilter[]) => Promise<string | null>
+    openSubtitleFile: () => Promise<string | null>
     saveFile: (defaultName: string) => Promise<string | null>
   }
   file: {

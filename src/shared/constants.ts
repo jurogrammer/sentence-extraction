@@ -8,6 +8,7 @@ export const IPC = {
   PIPELINE_COMPLETE: 'pipeline:complete',
   PIPELINE_ERROR: 'pipeline:error',
   DIALOG_OPEN_FILE: 'dialog:open-file',
+  DIALOG_OPEN_SUBTITLE: 'dialog:open-subtitle',
   DIALOG_SAVE_FILE: 'dialog:save-file',
   FILE_COPY: 'file:copy',
   OPENAI_VALIDATE_KEY: 'openai:validate-key',
