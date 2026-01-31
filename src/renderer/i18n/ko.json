@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "main": "생성",
+    "settings": "설정"
+  },
+  "main": {
+    "title": "Anki 카드 생성",
+    "description": "YouTube URL 또는 동영상 파일에서 문장을 추출하여 Anki 카드를 만듭니다.",
+    "urlPlaceholder": "YouTube URL을 입력하세요",
+    "orUpload": "또는 파일 업로드",
+    "selectFile": "파일 선택",
+    "start": "생성 시작",
+    "cancel": "취소",
+    "progress": "진행 상황",
+    "complete": "완료!",
+    "cardsCreated": "{{count}}개의 카드가 생성되었습니다.",
+    "save": "저장"
+  },
+  "settings": {
+    "title": "설정",
+    "aiProvider": "AI 제공자",
+    "openaiApiKey": "OpenAI API 키",
+    "openaiModel": "OpenAI 모델",
+    "ollamaModel": "Ollama 모델",
+    "ollamaUrl": "Ollama URL",
+    "whisperMode": "Whisper 모드",
+    "whisperLocal": "로컬 (whisper.cpp)",
+    "whisperCloud": "클라우드 (OpenAI)",
+    "whisperModelSize": "Whisper 모델 크기",
+    "audioPadding": "오디오 패딩 (ms)",
+    "targetLanguage": "학습 언어",
+    "nativeLanguage": "모국어",
+    "uiLanguage": "UI 언어",
+    "debugMode": "디버그 모드",
+    "maxCards": "최대 카드 수",
+    "saved": "저장되었습니다"
+  }
+}

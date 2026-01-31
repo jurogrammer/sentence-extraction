@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "main": "Generate",
+    "settings": "Settings"
+  },
+  "main": {
+    "title": "Generate Anki Cards",
+    "description": "Extract sentences from a YouTube video or local file to create Anki flashcards.",
+    "urlPlaceholder": "Enter YouTube URL",
+    "orUpload": "or upload a file",
+    "selectFile": "Select File",
+    "start": "Start",
+    "cancel": "Cancel",
+    "progress": "Progress",
+    "complete": "Complete!",
+    "cardsCreated": "{{count}} cards created.",
+    "save": "Save"
+  },
+  "settings": {
+    "title": "Settings",
+    "aiProvider": "AI Provider",
+    "openaiApiKey": "OpenAI API Key",
+    "openaiModel": "OpenAI Model",
+    "ollamaModel": "Ollama Model",
+    "ollamaUrl": "Ollama URL",
+    "whisperMode": "Whisper Mode",
+    "whisperLocal": "Local (whisper.cpp)",
+    "whisperCloud": "Cloud (OpenAI)",
+    "whisperModelSize": "Whisper Model Size",
+    "audioPadding": "Audio Padding (ms)",
+    "targetLanguage": "Target Language",
+    "nativeLanguage": "Native Language",
+    "uiLanguage": "UI Language",
+    "debugMode": "Debug Mode",
+    "maxCards": "Max Cards",
+    "saved": "Saved"
+  }
+}
