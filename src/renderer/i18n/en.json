@@ -9,6 +9,8 @@
     "urlPlaceholder": "Enter YouTube URL",
     "orUpload": "or upload a file",
     "selectFile": "Select File",
+    "selectSubtitle": "Select Subtitle",
+    "subtitleSelected": "Subtitle: {{filename}}",
     "start": "Start",
     "cancel": "Cancel",
     "progress": "Progress",

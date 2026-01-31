@@ -382,7 +382,7 @@ New Path: Task 7 → Task 8 → Task 6
 
 ---
 
-- [ ] 5. 자막 업로드 UI 구현
+- [x] 5. 자막 업로드 UI 구현
 
   **What to do**:
   - `FileUpload.tsx` 수정: 자막 파일 선택 버튼 추가

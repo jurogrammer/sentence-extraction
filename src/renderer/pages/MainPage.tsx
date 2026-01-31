@@ -10,16 +10,25 @@ export default function MainPage() {
   const { status, progress, result, error, start, cancel, reset } = usePipeline()
   const [url, setUrl] = useState('')
   const [filePath, setFilePath] = useState<string | null>(null)
+  const [subtitlePath, setSubtitlePath] = useState<string | null>(null)
 
   const running = status === 'running'
 
   const handleStart = useCallback(() => {
     if (url.trim()) {
-      start({ inputType: 'url', input: url.trim() })
+      start({ 
+        inputType: 'url', 
+        input: url.trim(),
+        subtitlePath: subtitlePath || undefined
+      })
     } else if (filePath) {
-      start({ inputType: 'file', input: filePath })
+      start({ 
+        inputType: 'file', 
+        input: filePath,
+        subtitlePath: subtitlePath || undefined
+      })
     }
-  }, [url, filePath, start])
+  }, [url, filePath, subtitlePath, start])
 
   const handleSave = useCallback(async () => {
     if (!result) return
@@ -40,7 +49,13 @@ export default function MainPage() {
         <UrlInput value={url} onChange={setUrl} disabled={running} />
         <div className="flex items-center gap-3">
           <span className="text-sm text-gray-400">{t('main.orUpload')}</span>
-          <FileUpload filePath={filePath} onSelect={setFilePath} disabled={running} />
+          <FileUpload 
+            filePath={filePath} 
+            onSelect={setFilePath} 
+            subtitlePath={subtitlePath}
+            onSelectSubtitle={setSubtitlePath}
+            disabled={running} 
+          />
         </div>
       </div>
 
